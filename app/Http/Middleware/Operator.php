@@ -16,6 +16,10 @@ class Operator
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if($request->user()->akses == "operator"){
+            return $next($request);
+        }
+
+        abort(403, 'Akses khusus operator');
     }
 }

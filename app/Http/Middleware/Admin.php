@@ -16,6 +16,11 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if($request->user()->akses == "admin"){
+            return $next($request);
+        }
+
+        abort(403, 'Akses khusus admin');
+
     }
 }
